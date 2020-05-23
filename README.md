@@ -9,7 +9,7 @@ The output file is written in markdown.
 ## Installation
 
 ``` sh
-$ npm i -g logtag
+$ npm i -g @r0mflip/logtag
 ```
 
 ## Usage
