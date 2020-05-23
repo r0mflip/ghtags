@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.5.0
+Released by r0mflip on 2020-05-23T15:23:43Z
+
+v0.5.0
+
+Changes from v0.4.0:
+- feat: add `--noempty` flag to filter empty releases
+
+
 ## v0.4.0
 Released by r0mflip on 2020-05-23T14:26:13Z
 
