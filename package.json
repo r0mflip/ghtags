@@ -1,6 +1,6 @@
 {
   "name": "@r0mflip/logtag",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Generate release history file from GitHub API",
   "main": "./lib/cjs/index.js",
   "type": "module",
