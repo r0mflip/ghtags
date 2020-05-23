@@ -1,12 +1,12 @@
 {
   "name": "@r0mflip/logtag",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generate release history file from GitHub API",
   "main": "./lib/cjs/index.js",
-  "type": "module",
+  "module": "./lib/esm/index.js",
   "exports": {
-    "require": "./lib/cjs/index.js",
-    "default": "./lib/esm/index.js"
+    "default": "./lib/cjs/index.js",
+    "import": "./lib/esm/index.js"
   },
   "bin": {
     "logtag": "./bin/logtag.js"
