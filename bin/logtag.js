@@ -75,7 +75,7 @@ async function logwriter(dataGenerator, outfile) {
     const msg = [
       '',
       `## ${tagData.name}`,
-      `Released by ${tagData.author} on ${tagData.date}${tagData.prerelease ? '`prerelease`' : ''}`,
+      `Released by ${tagData.author} on ${tagData.date}${tagData.prerelease ? ' `pre-release`' : ''}`,
       '',
       `${tagData.body}`,
       ''
