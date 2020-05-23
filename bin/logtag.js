@@ -87,8 +87,10 @@ async function logwriter(dataGenerator, outfile) {
   for await (const data of dataGenerator) {
     const name = data.name;
     const body = data.body.trim();
-    if (!body || body === name || `v${body}` === name || `V${body}` === name) {
-      continue; // Ignore empty message bodies
+    if (noempty) {
+      if (!body || body === name || `v${body}` === name || `V${body}` === name) {
+        continue; // Ignore empty message bodies
+      }
     }
     const msg = [
       '',
