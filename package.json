@@ -1,6 +1,6 @@
 {
   "name": "@r0mflip/logtag",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Generate releases/changelog/history file from tags(default)/releases of a GitHub repo.",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
