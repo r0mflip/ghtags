@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.6.0
+Released by r0mflip on 2020-05-23T15:36:33Z
+
+v0.6.0
+
+Changes since v0.5.0:
+  - fix: forgot to check `noempty` flag
+
+
 ## v0.5.0
 Released by r0mflip on 2020-05-23T15:23:43Z
 
