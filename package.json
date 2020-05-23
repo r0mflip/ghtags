@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Generate release history file from GitHub API",
   "main": "./lib/cjs/index.js",
+  "type": "module",
   "exports": {
     "require": "./lib/cjs/index.js",
     "default": "./lib/esm/index.js"
