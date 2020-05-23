@@ -71,13 +71,14 @@ async function logwriter(dataGenerator, outfile) {
 
   outStream.write('# Changelog\n');
 
-  for await (const tagData of dataGenerator) {
+  for await (const data of dataGenerator) {
     const msg = [
       '',
-      `## ${tagData.name}`,
-      `Released by ${tagData.author} on ${tagData.date}${tagData.prerelease ? ' `pre-release`' : ''}`,
+      `## ${data.name}`,
+      `Released by ${data.author} on ${data.date}${data.prerelease ? ' `pre-release`' : ''}`,
       '',
-      `${tagData.body}`,
+      `${data.body}`,
+      '',
       ''
     ].join('\n');
     outStream.write(msg);
