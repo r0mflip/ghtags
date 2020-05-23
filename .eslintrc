@@ -1,0 +1,17 @@
+{
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    "max-len": [2, {
+      "code": 100,
+      "tabWidth": 2,
+      "ignoreUrls": true,
+      "ignoreComments": true
+    }]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "logtag",
+  "version": "0.1.0",
+  "description": "Generate release history file from GitHub API",
+  "main": "./lib/cjs/index.js",
+  "exports": {
+    "require": "./lib/cjs/index.js",
+    "default": "./lib/esm/index.js"
+  },
+  "bin": {
+    "logtag": "./bin/logtag.js"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "npm run cjs",
+    "cjs": "ascjs --no-default ./lib/esm/index.js ./lib/cjs/index.js",
+    "eslint": "eslint",
+    "test": "npm run eslint"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r0mflip/logtag.git"
+  },
+  "keywords": [
+    "releases",
+    "GitHub",
+    "history",
+    "markdown",
+    "releases",
+    "generate"
+  ],
+  "author": "r0mflip",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/r0mflip/logtag/issues"
+  },
+  "homepage": "https://github.com/r0mflip/logtag#readme",
+  "devDependencies": {
+    "ascjs": "^4.0.1",
+    "eslint": "^7.0.0",
+    "nyc": "^15.0.1",
+    "tape": "^5.0.0"
+  }
+}
