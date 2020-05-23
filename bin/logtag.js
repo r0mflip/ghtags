@@ -13,6 +13,7 @@ let repo = '';
 let token = '';
 let outfile = '';
 let releases = false;
+let noempty = false;
 let help = false;
 
 for (let idx = 0; idx < args.length; ) {
@@ -34,6 +35,10 @@ for (let idx = 0; idx < args.length; ) {
     idx++;
   }
 
+  if (arg === '--noempty' || arg === '-n') {
+    noempty = true;
+  }
+
   if (arg === '--help' || arg === '-h') {
     help = true;
     idx++;
@@ -53,7 +58,15 @@ function printHelp() {
     '    --out <OutputFile>.md \\              # Output to file, default is stdout',
     '    --releases                           # Use GH releases instead of git tags',
     '',
-    ''
+    'Options:',
+    '  --repo <repo>      Specify repo in <scope>/<repo> format (-r)',
+    '  --token <token>    GitHub access token (-t)',
+    '  --out <file>       Save formatted markdown output into file (-o)',
+    '  --releases         If specified gets info from releases instead of tags',
+    '  --noempty          Skip entities with empty or same body as tag name (-n)',
+    '  --help             Prints this message (-h)',
+    '',
+    '',
   ].join('\n'));
   process.exit(0);
 }
@@ -72,6 +85,11 @@ async function logwriter(dataGenerator, outfile) {
   outStream.write('# Changelog\n');
 
   for await (const data of dataGenerator) {
+    const name = data.name;
+    const body = data.body.trim();
+    if (!body || body === name || `v${body}` === name || `V${body}` === name) {
+      continue; // Ignore empty message bodies
+    }
     const msg = [
       '',
       `## ${data.name}`,
