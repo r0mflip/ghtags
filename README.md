@@ -5,6 +5,7 @@ tags(default) and releases in GitHub repo.
 
 The output file is written in markdown.
 
+> This is an experimental module of mine (as usual 😝)
 
 ## Installation
 
@@ -25,11 +26,10 @@ $ logtag --repo expressjs/express \
 
 ```js
 // CJS
-const logtag = require('logtag');
+const logtag = require('@r0mflip/logtag');
 
 // ESM
-
-import logtag from 'logstag';
+import logtag from '@r0mflip/logtag';
 
 
 // logtag is an AsyncGeneratorFunction
