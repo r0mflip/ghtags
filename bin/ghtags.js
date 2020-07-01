@@ -91,11 +91,12 @@ async function logwriter(dataGenerator, outfile) {
     // https://stackoverflow.com/a/3561711
     const escapedName = data.name.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
-    // If body starts with the name of release. Remove this redundancy.
-    const body = data.body.replace(new RegExp(`^\s*${escapedName}(\s|$)`, 'im'), '').trim();
+    // If body starts with the name of release (commit messages do this) strip it off.
+    const body = data.body.replace(new RegExp(`^\s*${escapedName}(\n*|$)`, 'i'), '');
 
-    if (noempty && !body) {
-      continue; // Ignore empty message bodies
+    // Ignore if empty message body or body and tag are the same using the (v) prefix (version).
+    if (noempty && (!body || `v${body}` === data.name || `v${data.name}` === body)) {
+      continue;
     }
 
     const msg = [

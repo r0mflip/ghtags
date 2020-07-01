@@ -1,6 +1,6 @@
 {
   "name": "ghtags",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Generate releases/changelog/history file from tags(default)/releases of a GitHub repo.",
   "main": "./lib/index.js",
   "bin": {
