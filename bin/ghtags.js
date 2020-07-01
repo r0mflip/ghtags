@@ -5,7 +5,7 @@
 const {createWriteStream} = require('fs');
 const {resolve: resolvePath, normalize: normalizePath} = require('path');
 
-const logtag = require('../');
+const getTags = require('../');
 
 const args = process.argv.slice(2);
 
@@ -48,12 +48,12 @@ for (let idx = 0; idx < args.length; ) {
 function printHelp() {
   process.stdout.write([
     '',
-    'logtag',
+    'ghtags',
     '',
     'Generate releases/changelog/history file from tags and releases in GitHub repo.',
     '',
     'Usage:',
-    ' $ logtag --repo expressjs/express \\',
+    ' $ ghtags --repo expressjs/express \\',
     '    --token <GitHubAccesToken> \\         # Personal access token for GitHub API',
     '    --out <OutputFile>.md \\              # Output to file, default is stdout',
     '    --releases                           # Use GH releases instead of git tags',
@@ -62,7 +62,7 @@ function printHelp() {
     '  --repo <repo>      Specify repo in <scope>/<repo> format (-r)',
     '  --token <token>    GitHub access token (-t)',
     '  --out <file>       Save formatted markdown output into file (-o)',
-    '  --releases         If specified gets info from releases instead of tags',
+    '  --releases         If specified gets info from releases (uses tags by default)',
     '  --noempty          Skip entities with empty or same body as tag name (-n)',
     '  --help             Prints this message (-h)',
     '',
@@ -75,7 +75,10 @@ if (help || !repo || !token) {
   printHelp();
 }
 
+
+// Read endlessly from dataGenerator and write formatted data.
 async function logwriter(dataGenerator, outfile) {
+  // Log to stdout by default.
   const outStream = !outfile ? process.stdout : createWriteStream(outfile);
 
   if (outfile) {
@@ -85,27 +88,31 @@ async function logwriter(dataGenerator, outfile) {
   outStream.write('# Changelog\n');
 
   for await (const data of dataGenerator) {
-    const name = data.name;
-    const body = data.body.trim();
-    if (noempty) {
-      if (!body || body === name || `v${body}` === name || `V${body}` === name) {
-        continue; // Ignore empty message bodies
-      }
+    // https://stackoverflow.com/a/3561711
+    const escapedName = data.name.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+    // If body starts with the name of release. Remove this redundancy.
+    const body = data.body.replace(new RegExp(`^\s*${escapedName}(\s|$)`, 'im'), '').trim();
+
+    if (noempty && !body) {
+      continue; // Ignore empty message bodies
     }
+
     const msg = [
       '',
-      `## ${data.name}`,
-      `Released by ${data.author} on ${data.date}${data.prerelease ? ' `pre-release`' : ''}`,
+      `## [${data.name}](${data.url})`,
+      `${data.author} released this on ${data.date.slice(0, 10)}`,
       '',
-      `${data.body}`,
+      `${body}`,
       '',
       ''
     ].join('\n');
+
     outStream.write(msg);
   }
 }
 
 (async _ => {
-  const tagSpitter = await logtag({repo, token, releases});
+  const tagSpitter = await getTags({repo, token, releases});
   await logwriter(tagSpitter, outfile);
 })();

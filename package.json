@@ -1,20 +1,12 @@
 {
-  "name": "@r0mflip/logtag",
-  "version": "0.6.0",
+  "name": "ghtags",
+  "version": "0.7.0",
   "description": "Generate releases/changelog/history file from tags(default)/releases of a GitHub repo.",
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
-  "exports": {
-    "default": "./lib/cjs/index.js",
-    "import": "./lib/esm/index.js"
-  },
+  "main": "./lib/index.js",
   "bin": {
-    "logtag": "./bin/logtag.js"
+    "ghtags": "./bin/ghtags.js"
   },
   "scripts": {
-    "prepublishOnly": "npm run build",
-    "build": "npm run cjs",
-    "cjs": "ascjs --no-default ./lib/esm/index.js ./lib/cjs/index.js",
     "eslint": "eslint",
     "test": "npm run eslint"
   },
@@ -28,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/r0mflip/logtag.git"
+    "url": "git+https://github.com/r0mflip/ghtags.git"
   },
   "keywords": [
     "releases",
@@ -41,11 +33,10 @@
   "author": "r0mflip",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/r0mflip/logtag/issues"
+    "url": "https://github.com/r0mflip/ghtags/issues"
   },
-  "homepage": "https://github.com/r0mflip/logtag#readme",
+  "homepage": "https://github.com/r0mflip/ghtags#readme",
   "devDependencies": {
-    "ascjs": "^4.0.1",
     "eslint": "^7.0.0",
     "nyc": "^15.0.1",
     "tape": "^5.0.0"
